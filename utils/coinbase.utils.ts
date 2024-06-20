@@ -1,18 +1,5 @@
 import fs from "fs";
-
-interface SeedConfig {
-    [key: string]: {
-        seed: string;
-        encrypted: boolean;
-        authTag: string;
-        iv: string;
-    };
-}
-
-interface TransformedConfig {
-    walletId: string;
-    seed: string;
-}
+import { SeedConfig, TransformedConfig } from "types";
 
 export const transformConfig = (filePath: string): TransformedConfig => {
     try {
