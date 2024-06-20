@@ -1,12 +1,12 @@
 import { Router } from "express";
 import {
-  createWallet,
+  getWallet,
   sendAssets
 } from "../controllers";
 
 const walletRouter = Router();
 
-walletRouter.post("/", createWallet);
+walletRouter.get("/", getWallet);
 walletRouter.post("/send-assets", sendAssets);
 
 export default walletRouter;

@@ -1,11 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import AppError from "../utils/appError";
+import { wallet } from "../services/coinbase.services";
 
-export async function createWallet(req: Request, res: Response, next: NextFunction) {
+export async function getWallet(req: Request, res: Response, next: NextFunction) {
     try {
-        return res.status(200).json();
+        const addressData = wallet.getDefaultAddress();
 
-        throw new AppError(500, "error", "Error ");
+        return res.status(200).json({
+            address: addressData?.getId(),
+            chain: addressData?.getNetworkId()
+        });
     } catch (error) {
         next(error);
     }
