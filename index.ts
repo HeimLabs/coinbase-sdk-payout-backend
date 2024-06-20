@@ -2,6 +2,7 @@ import "dotenv/config";
 import middlewares from "./middlewares";
 import router from "./routes";
 import express from "express";
+import { coinbase } from "./services";
 
 const start = async () => {
     let app = express();
@@ -11,6 +12,7 @@ const start = async () => {
 
     app.listen(process.env.PORT || 5000, async () => {
         try {
+            await coinbase.setupCoinbase();
             console.log(`🚀 Server running on port ${process.env.PORT || 5000}`);
         } catch (error) {
             await gracefulShutdown();

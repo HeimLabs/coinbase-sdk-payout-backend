@@ -127,3 +127,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .vscode
+
+wallet_seed.json
+cdp_api_key.json
