@@ -1,12 +1,15 @@
 import { Router } from "express";
 import {
   getWallet,
-  sendAssets
+  transferAssets,
+  // swapAssets
 } from "../controllers";
 
 const walletRouter = Router();
 
 walletRouter.get("/", getWallet);
-walletRouter.post("/send-assets", sendAssets);
+walletRouter.post("/transfer-assets", transferAssets);
+// @temp - Unsupported on Base Sepolia
+// walletRouter.post("/swap-assets", swapAssets);
 
 export default walletRouter;

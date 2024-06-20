@@ -1,2 +1,2 @@
-export { NODE_ENV, Status } from "./api.types";
+export { NODE_ENV, Status, TransferData } from "./api.types";
 export { SeedConfig, TransformedConfig } from "./coinbase.types";
