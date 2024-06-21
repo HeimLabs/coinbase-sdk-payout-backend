@@ -6,7 +6,7 @@ export type Status = "idle" | "loading" | "success" | "fail" | "error";
 
 export type TransferData = Array<{
     wallet: string;
-    amount: number;
+    amount: string;
 }>;
 
 export type AssetTransferBody = {

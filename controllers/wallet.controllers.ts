@@ -31,7 +31,7 @@ export async function transferAssets(req: AssetTransferRequest, res: Response, n
         let asset: string;
         // let decimals: number = 18;
 
-        const totalAmount = data.reduce((sum, row) => { return sum + row.amount }, 0);
+        const totalAmount = data.reduce((sum, row) => { return sum + parseFloat(row.amount) }, 0);
 
         // Native (ETH) transfer
         if (token == ethers.constants.AddressZero) {
@@ -64,7 +64,8 @@ export async function transferAssets(req: AssetTransferRequest, res: Response, n
 
         for await (const row of data) {
             try {
-                const transfer = await wallet.createTransfer(row.amount, asset, row.wallet);
+                const transfer = await wallet.createTransfer(parseFloat(row.amount), asset, row.wallet);
+                // @todo - SSE? WebSocket?
                 returnData.push(transfer.getTransactionLink());
             } catch (err) {
                 returnData.push("failed");
