@@ -40,23 +40,14 @@ export async function transferAssets(req: AssetTransferRequest, res: Response, n
             if (balance.lessThan(totalAmount))
                 throw new AppError(400, "error", "Insufficient balance");
         }
-        // ERC20 Token Transfer
+        // USDC Token Transfer
+        else if (token == "0x036CbD53842c5426634e7929541eC2318f3dCF7e") {
+            asset = Coinbase.assets.Usdc;
+            const balance = await wallet.getBalance(asset);
+            if (balance.lessThan(totalAmount))
+                throw new AppError(400, "error", "Insufficient balance");
+        }
         else {
-            // @temp - Custom Assets Unsupported
-            // if (!ethers.utils.isAddress(token))
-            //     throw new AppError(400, "error", "Invalid token");
-
-            // const provider = new ethers.providers.JsonRpcProvider("https://sepolia.base.org");
-            // const tokenInterface = new ethers.utils.Interface(erc20Config.abi);
-            // const tokenContract = new ethers.Contract(token, tokenInterface, provider) as ERC20;
-            // // Check if valid ERC20
-            // try {
-            //     decimals = await tokenContract.decimals();
-            // } catch (err) {
-            //     throw new AppError(400, "error", "Invalid token")
-            // }
-            // @todo - balance checks
-            // asset = token;
             throw new AppError(400, "error", "Unsupported token");
         }
 
