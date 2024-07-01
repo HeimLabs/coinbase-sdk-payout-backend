@@ -128,5 +128,5 @@ dist
 .pnp.*
 .vscode
 
-wallet_seed.json
+wallet_seed*
 cdp_api_key.json
