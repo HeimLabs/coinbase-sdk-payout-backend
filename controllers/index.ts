@@ -3,3 +3,4 @@ export {
     getWallet, transferAssets,
     // swapAssets 
 } from "./wallet.controllers";
+export { sponsor } from "./paymaster.controllers";
