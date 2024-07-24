@@ -4,3 +4,4 @@ export {
     // swapAssets 
 } from "./wallet.controllers";
 export { sponsor } from "./paymaster.controllers";
+export { createOnrampToken } from "./onramp.controllers";
