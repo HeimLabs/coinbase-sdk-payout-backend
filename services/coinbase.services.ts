@@ -23,18 +23,20 @@ const setupCoinbase = async () => {
         }
         // Create Wallet
         else {
-            wallet = await user.createWallet();
+            wallet = await user.createWallet({ networkId: process.env.APP_ENV == "production" ? Coinbase.networks.BaseMainnet : Coinbase.networks.BaseSepolia });
             const saveSeed = wallet.saveSeed(seedPath);
             console.log("[coinbase/setup] ✅ Seed saved: ", saveSeed);
         }
 
-        address = wallet.getDefaultAddress();
-        const nativeBalance = await wallet?.getBalance(Coinbase.assets.Eth);
+        if (process.env.APP_ENV != "production") {
+            address = wallet.getDefaultAddress();
+            const nativeBalance = await wallet?.getBalance(Coinbase.assets.Eth);
 
-        if (nativeBalance?.eq(0)) {
-            console.log("[coinbase/setup] 🔄 Funding...");
-            const faucetTxn = await wallet?.faucet();
-            console.log("[coinbase/setup] ✅ Funded: ", faucetTxn);
+            if (nativeBalance?.eq(0)) {
+                console.log("[coinbase/setup] 🔄 Funding...");
+                const faucetTxn = await wallet?.faucet();
+                console.log("[coinbase/setup] ✅ Funded: ", faucetTxn);
+            }
         }
     } catch (err) {
         console.error("[coinbase/setup] ❌ Failed to setup Coinbase SDK");
