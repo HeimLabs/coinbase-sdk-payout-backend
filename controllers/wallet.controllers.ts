@@ -41,7 +41,7 @@ export async function transferAssets(req: AssetTransferRequest, res: Response, n
                 throw new AppError(400, "error", "Insufficient balance");
         }
         // USDC Token Transfer
-        else if (token == "0x036CbD53842c5426634e7929541eC2318f3dCF7e") {
+        else if (token == "0x036CbD53842c5426634e7929541eC2318f3dCF7e" || token == "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913") {
             asset = Coinbase.assets.Usdc;
             const balance = await wallet.getBalance(asset);
             if (balance.lessThan(totalAmount))
