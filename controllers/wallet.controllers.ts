@@ -55,7 +55,11 @@ export async function transferAssets(req: AssetTransferRequest, res: Response, n
 
         for await (const row of data) {
             try {
-                const transfer = await wallet.createTransfer(parseFloat(row.amount), asset, row.wallet);
+                const transfer = await wallet.createTransfer({
+                    amount: parseFloat(row.amount),
+                    assetId: asset,
+                    destination: row.wallet
+                });
                 // @todo - SSE? WebSocket?
                 returnData.push(transfer.getTransactionLink());
             } catch (err) {
