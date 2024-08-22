@@ -58,7 +58,8 @@ export async function transferAssets(req: AssetTransferRequest, res: Response, n
                 const transfer = await wallet.createTransfer({
                     amount: parseFloat(row.amount),
                     assetId: asset,
-                    destination: row.wallet
+                    destination: row.wallet,
+                    gasless: asset == Coinbase.assets.Usdc ? true : false
                 });
                 // @todo - SSE? WebSocket?
                 returnData.push(transfer.getTransactionLink());
